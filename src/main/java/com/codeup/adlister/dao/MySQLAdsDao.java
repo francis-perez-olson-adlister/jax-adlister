@@ -55,6 +55,17 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    public void delete (Long id) {
+        try {
+            String deleteQuery = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(deleteQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1, id);
+            stmt.execute();
+        } catch(SQLException e) {
+            throw new RuntimeException("Error deleting ad.");
+        }
+    }
+
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
             rs.getLong("id"),
@@ -71,4 +82,5 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
 }
