@@ -9,4 +9,5 @@ public interface Users {
     Long insert(User user);
 
     void update(User user);
+    User findById(Long id);
 }

@@ -19,13 +19,14 @@
       <input id="email" name="email" class="form-control" type="text" value="${user.email}">
     </div>
     <div class="form-group">
-      <label for="password">New Password</label>
-      <input id="password" name="password" class="form-control" type="password">
+      <label for="password">Password</label>
+      <input id="password" name="password" class="form-control" type="password" required>
     </div>
     <div class="form-group">
       <label for="confirm_password">Confirm Password</label>
-      <input id="confirm_password" name="confirm_password" class="form-control" type="password">
+      <input id="confirm_password" name="confirm_password" class="form-control" type="password" required>
     </div>
+    <input type="hidden" name="userId" value="${user.id}">
     <input type="submit" class="btn btn-primary btn-block">
   </form>
 </div>
