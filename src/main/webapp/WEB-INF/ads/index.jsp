@@ -34,7 +34,7 @@
 <%--                </div>--%>
 <%--                <button type="submit" class="btn btn-block btn-primary">Edit</button>--%>
 <%--            </form>--%>
-            <form action="/ads" method="post">
+            <form action="/edit" method="get">
                 <button class="edit" id="editButton" name="editButton" value=${ad.id}>Edit</button>
                 <button class="delete" id="deleteButton" name="deleteButton" value=${ad.id}>Delete</button>
             </form>

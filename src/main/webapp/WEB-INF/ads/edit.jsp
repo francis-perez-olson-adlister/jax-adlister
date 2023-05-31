@@ -8,7 +8,7 @@
 <body>
 <div class="container">
   <h1>Edit Ad</h1>
-  <form action="/ads/edit" method="post">
+  <form action="/ads" method="post">
     <div class="form-group">
       <label for="title">Title</label>
       <input id="title" name="title" class="form-control" type="text" value="${ad.title}">
