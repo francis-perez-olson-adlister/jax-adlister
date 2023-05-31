@@ -15,24 +15,46 @@ import java.io.IOException;
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getSession().getAttribute("user") == null) {
+        if (request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/login");
-            // add a return statement to exit out of the entire method.
             return;
         }
 
-        request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
+        String titleValue = (String) request.getAttribute("titleValue");
+        String descriptionValue = (String) request.getAttribute("descriptionValue");
 
+        request.setAttribute("titleValue", titleValue);
+        request.setAttribute("descriptionValue", descriptionValue);
+
+        request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User loggedInUser = (User) request.getSession().getAttribute("user");
-        Ad ad = new Ad(
-            loggedInUser.getId(),
-            request.getParameter("title"),
-            request.getParameter("description")
-        );
-        DaoFactory.getAdsDao().insert(ad);
-        response.sendRedirect("/ads");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+
+        boolean isValid = validateFormData(title, description);
+
+        if (isValid) {
+            Ad ad = new Ad(
+                    loggedInUser.getId(),
+                    title,
+                    description
+            );
+            DaoFactory.getAdsDao().insert(ad);
+            response.sendRedirect("/ads");
+        } else {
+            request.setAttribute("titleValue", title);
+            request.setAttribute("descriptionValue", description);
+
+            doGet(request, response); // Call doGet to display the form again with the entered values
+        }
+    }
+
+
+    private boolean validateFormData(String title, String description) {
+
+        return title != null && !title.isEmpty() && description != null && !description.isEmpty();
     }
 }

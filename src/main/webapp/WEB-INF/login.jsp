@@ -6,20 +6,37 @@
     </jsp:include>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-    <div class="container">
-        <h1>Please Log In</h1>
-        <form action="/login" method="POST">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input id="password" name="password" class="form-control" type="password">
-            </div>
-            <input type="submit" class="btn btn-primary btn-block" value="Log In">
-        </form>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
+<div class="container">
+    <h1>Please Log In</h1>
+
+    <% String errorCode = request.getParameter("error"); %>
+    <% if (errorCode != null) { %>
+    <% if (errorCode.equals("1")) { %>
+    <div class="alert alert-danger" role="alert">
+        Incorrect username or password!
     </div>
+    <% } else if (errorCode.equals("2")) { %>
+    <div class="alert alert-danger" role="alert">
+        Incorrect username or password!
+    </div>
+    <% } %>
+    <% } %>
+
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" name="username" class="form-control" type="text" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" name="password" class="form-control" type="password" required>
+        </div>
+        <input type="submit" class="btn btn-primary btn-block" value="Log In">
+    </form>
+    <form action="/register" method="GET">
+        <input type="submit" class="btn btn-primary btn-block" value="Sign Up">
+    </form>
+</div>
 </body>
 </html>

@@ -15,6 +15,14 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Retrieve the previous input values from the request attributes
+        String username = (String) request.getAttribute("username");
+        String email = (String) request.getAttribute("email");
+
+        // Set the input values as request attributes
+        request.setAttribute("username", username);
+        request.setAttribute("email", email);
+
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
@@ -24,27 +32,22 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
-        // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
+        boolean inputHasErrors = username.isEmpty() || email.isEmpty() || password.isEmpty() || (!password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
+            // Set the input values as request attributes for the next rendering of the form
+            request.setAttribute("username", username);
+            request.setAttribute("email", email);
+
             response.sendRedirect("/register");
             return;
         }
 
-        // create and save a new user
         User user = new User(username, email, password);
-
-        // hash the password
-
         String hash = Password.hash(user.getPassword());
-
         user.setPassword(hash);
-
         DaoFactory.getUsersDao().insert(user);
         response.sendRedirect("/login");
     }
 }
+
