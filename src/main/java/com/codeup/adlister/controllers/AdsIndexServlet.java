@@ -22,10 +22,15 @@ public class AdsIndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String edit = req.getParameter("editButton");
-        Long delete = Long.valueOf(req.getParameter("deleteButton"));
 
-        if(delete != null) {
+
+        if(edit != null) {
+            DaoFactory.getAdsDao().delete(Long.valueOf(edit));
+            resp.sendRedirect("/edit");
+        } else {
+            Long delete = Long.valueOf(req.getParameter("deleteButton"));
             DaoFactory.getAdsDao().delete(delete);
+            resp.sendRedirect("/ads");
         }
     }
 }

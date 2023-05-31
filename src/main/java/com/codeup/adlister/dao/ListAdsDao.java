@@ -31,6 +31,11 @@ public class ListAdsDao implements Ads {
     public void delete(Long id) {
     }
 
+    @Override
+    public Ad selectAdById(Long id) {
+        return null;
+    }
+
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(

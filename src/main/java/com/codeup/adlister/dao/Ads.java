@@ -10,4 +10,6 @@ public interface Ads {
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
     void delete(Long id);
+    Ad selectAdById(Long id);
+    Long update(Ad ad);
 }
