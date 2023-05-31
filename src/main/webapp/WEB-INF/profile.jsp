@@ -14,5 +14,6 @@
     <form action="/ads/create" method="GET">
         <input type="submit" class="btn btn-primary btn-block" value="Create Ad">
     </form>
+
 </body>
 </html>
