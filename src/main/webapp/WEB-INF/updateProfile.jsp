@@ -29,6 +29,9 @@
     <input type="hidden" name="userId" value="${user.id}">
     <input type="submit" class="btn btn-primary btn-block">
   </form>
+  <form action="/profile/delete" method="get">
+    <input type="submit" name="deleteUser" value="${user.}"
+  </form>
 </div>
 </body>
 </html>

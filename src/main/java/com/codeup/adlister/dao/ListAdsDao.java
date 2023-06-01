@@ -40,6 +40,11 @@ public class ListAdsDao implements Ads {
     public void update(Ad ad) {
     }
 
+    @Override
+    public List<Ad> selectAdByUserId(Long userId) {
+        return null;
+    }
+
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(

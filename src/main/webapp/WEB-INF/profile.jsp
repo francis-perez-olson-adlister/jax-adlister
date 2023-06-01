@@ -24,11 +24,14 @@
             </form>
         </div>
     </c:forEach>
+    <form action="/profile" method="post">
+        <button type="submit" class="btn btn-primary btn-block" name="userId" value = ${sessionScope.user.id}>Show Your Ads</button>
+    </form>
     <form action="/ads/create" method="GET">
         <input type="submit" class="btn btn-primary btn-block" value="Create Ad">
     </form>
     <form action="/profile/update" method="get">
-        <button type="submit" class="btn btn-primary btn-block" name = "updateButton"value=${sessionScope.user.username}>Account Settings</button>
+        <button type="submit" class="btn btn-primary btn-block" name = "updateButton" value=${sessionScope.user.username}>Account Settings</button>
     </form>
 
 </body>

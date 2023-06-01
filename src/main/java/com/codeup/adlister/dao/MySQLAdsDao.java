@@ -85,7 +85,6 @@ public class MySQLAdsDao implements Ads {
             PreparedStatement stmt = connection.prepareStatement(selectQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, userId);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("error selecting ad by user_id");

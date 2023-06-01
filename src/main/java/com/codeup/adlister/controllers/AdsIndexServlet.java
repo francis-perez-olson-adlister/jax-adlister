@@ -35,6 +35,6 @@ public class AdsIndexServlet extends HttpServlet {
         ad.setDescription(description);
         DaoFactory.getAdsDao().update(ad);
 
-        resp.sendRedirect("/ads");
+        resp.sendRedirect("/profile");
     }
 }
