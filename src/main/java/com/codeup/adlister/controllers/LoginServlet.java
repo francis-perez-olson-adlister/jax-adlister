@@ -19,6 +19,13 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/profile");
             return;
         }
+
+        String signUpButton = request.getParameter("signup");
+        if (signUpButton != null && signUpButton.equals("true")) {
+            response.sendRedirect("/register");
+            return;
+        }
+
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
@@ -28,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         User user = DaoFactory.getUsersDao().findByUsername(username);
 
         if (user == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("/login?error=1");
             return;
         }
 
@@ -38,7 +45,8 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
         } else {
-            response.sendRedirect("/login");
+            response.sendRedirect("/login?error=2");
         }
     }
+
 }

@@ -12,13 +12,19 @@
 <div class="container">
     <h1>Here Are all the ads!</h1>
 <jsp:include page="/search.jsp"/>
-<%--    <c:forEach var="ad" items="${ads}">--%>
-<%--        <div class="col-md-6">--%>
-<%--            <h2>${ad.title}</h2>--%>
-<%--            <p>${ad.description}</p>--%>
-<%--        </div>--%>
-<%--    </c:forEach>--%>
-</div>
 
+    <c:forEach var="ad" items="${ads}">
+        <div class="adCard col-md-4">
+            <div>
+                <h2>${ad.title}</h2>
+                <p>${ad.description}</p>
+            </div>
+<%--            <form action="/edit" method="get">--%>
+<%--                <button class="edit" id="editButton" name="editButton" value=${ad.id}>Edit</button>--%>
+<%--                <button class="delete" id="deleteButton" name="deleteButton" value=${ad.id}>Delete</button>--%>
+<%--            </form>--%>
+        </div>
+    </c:forEach>
+</div>
 </body>
 </html>

@@ -14,6 +14,11 @@ public interface Ads {
     Long insert(Ad ad);
 
     List<Ad> search(String inputvalue);
+
+    void delete(Long id);
+    Ad selectAdById(Long id);
+    void update(Ad ad);
+    List<Ad> selectAdByUserId(Long userId);
 }
 
 

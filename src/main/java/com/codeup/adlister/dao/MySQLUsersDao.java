@@ -12,15 +12,14 @@ public class MySQLUsersDao implements Users {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
         }
     }
-
 
     @Override
     public User findByUsername(String username) {
@@ -31,6 +30,38 @@ public class MySQLUsersDao implements Users {
             return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
             throw new RuntimeException("Error finding a user by username", e);
+        }
+    }
+    public User findById(Long id) {
+        String query = "SELECT * FROM users WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            return extractUser(stmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException("error finding user by id", e);
+        }
+    }
+
+    public void deleteById(Long id) {
+        String query = "DELETE FROM users WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+        } catch (SQLException e) {
+            throw new RuntimeException("error deleting user", e);
+        }
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        String query = "SELECT * FROM users WHERE email = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, email);
+            return extractUser(stmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by email", e);
         }
     }
 
@@ -51,16 +82,30 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    @Override
+    public void update(User user) {
+        try {
+            String updateQuery = "UPDATE users set username = ?, email = ?, password = ? WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setLong(4, user.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating ad", e);
+        }
+    }
+
     private User extractUser(ResultSet rs) throws SQLException {
-        if (! rs.next()) {
+        if (!rs.next()) {
             return null;
         }
         return new User(
-            rs.getLong("id"),
-            rs.getString("username"),
-            rs.getString("email"),
-            rs.getString("password")
+                rs.getLong("id"),
+                rs.getString("username"),
+                rs.getString("email"),
+                rs.getString("password")
         );
     }
-
 }

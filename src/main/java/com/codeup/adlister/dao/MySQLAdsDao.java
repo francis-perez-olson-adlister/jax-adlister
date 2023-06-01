@@ -66,6 +66,54 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error searching for an ad.", e);
         }
 
+    public void delete (Long id) {
+        try {
+            String deleteQuery = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(deleteQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1, id);
+            stmt.execute();
+        } catch(SQLException e) {
+            throw new RuntimeException("Error deleting ad.");
+        }
+    }
+
+    public Ad selectAdById(Long id) {
+        try {
+            String selectQuery = "SELECT * FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(selectQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return extractAd(rs);
+        } catch(SQLException e) {
+            throw new RuntimeException("Error selecting ad by id", e);
+        }
+    }
+
+    public List<Ad> selectAdByUserId(Long userId) {
+        try {
+            String selectQuery = "Select * FROM ads WHERE user_id = ?";
+            PreparedStatement stmt = connection.prepareStatement(selectQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("error selecting ad by user_id");
+        }
+    }
+
+    @Override
+    public void update(Ad ad) {
+        try {
+            String updateQuery = "UPDATE ads set title = ?, description = ? WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating ad", e);
+        }
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
@@ -84,7 +132,6 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-
 
 }
 
