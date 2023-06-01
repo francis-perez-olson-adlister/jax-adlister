@@ -14,12 +14,11 @@ import java.util.List;
 @WebServlet(name = "controllers.SearchServlet", urlPatterns = "/Search")
 public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+        request.getRequestDispatcher("/search.jsp").forward(request, response);
 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
         List<Ad> list = DaoFactory.getAdsDao().search(request.getParameter("inputvalue"));
         request.setAttribute("ads", list);
         System.out.println(list);

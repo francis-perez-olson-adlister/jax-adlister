@@ -9,9 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <jsp:include page="/WEB-INF/partials/head.jsp">
+        <jsp:param name="title" value="Viewing All The Ads" />
+    </jsp:include>
 </head>
 <body>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="input-group mb-3">
     <form action="/Search" method="post" id="search">
         <input type="text" class="form-control" aria-label="Default"
