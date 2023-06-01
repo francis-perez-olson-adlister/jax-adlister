@@ -8,6 +8,7 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
+    <jsp:include page="/search.jsp"/>
 
     <div class="container">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
