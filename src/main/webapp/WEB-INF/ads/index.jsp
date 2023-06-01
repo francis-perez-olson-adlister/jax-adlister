@@ -5,6 +5,12 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Viewing All The Ads" />
     </jsp:include>
+    <style>
+        img {
+            width: 350px;
+            height: 300px;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
@@ -16,6 +22,7 @@
     <c:forEach var="ad" items="${ads}">
         <div class="adCard col-md-4">
             <div>
+                <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="no image found" />
                 <h2>${ad.title}</h2>
                 <form action="/details" method="get">
                     <button class="details" id="detailsBtn" name="detailsBtn" value="${ad.id}">Details</button>
