@@ -15,14 +15,15 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-<div class="input-group mb-3">
-    <form action="/Search" method="post" id="search">
-        <input type="text" class="form-control" aria-label="Default"
-               aria-describedby="inputGroup-sizing-default"  name="inputvalue">
-        <div class="input-group-prepend">
-            <button>search</button>
-        </div>
-    </form>
+<%--<div class="input-group mb-3">--%>
+<%--    <form action="/Search" method="post" id="search">--%>
+<%--        <input type="text" class="form-control" aria-label="Default"--%>
+<%--               aria-describedby="inputGroup-sizing-default"  name="inputvalue">--%>
+<%--        <div class="input-group-prepend">--%>
+<%--            <button>search</button>--%>
+<%--        </div>--%>
+<%--    </form>--%>
+
     <c:forEach var="ad" items="${ads}">
         <div class="adCard col-md-4">
             <div>
