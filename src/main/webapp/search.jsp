@@ -21,9 +21,13 @@
         </div>
     </form>
     <c:forEach var="ad" items="${ads}">
-        <div>
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+        <div class="adCard col-md-4">
+            <div>
+                <h2>${ad.title}</h2>
+                <form action="/details" method="get">
+                    <button class="details" id="detailsBtn" name="detailsBtn" value="${ad.id}">Details</button>
+                </form>
+            </div>
         </div>
     </c:forEach>
 </div>
