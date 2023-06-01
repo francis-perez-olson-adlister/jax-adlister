@@ -18,10 +18,10 @@
                 <h2>${ad.title}</h2>
                 <p>${ad.description}</p>
             </div>
-            <form action="/edit" method="get">
-                <button class="edit" id="editButton" name="editButton" value=${ad.id}>Edit</button>
-                <button class="delete" id="deleteButton" name="deleteButton" value=${ad.id}>Delete</button>
-            </form>
+<%--            <form action="/edit" method="get">--%>
+<%--                <button class="edit" id="editButton" name="editButton" value=${ad.id}>Edit</button>--%>
+<%--                <button class="delete" id="deleteButton" name="deleteButton" value=${ad.id}>Delete</button>--%>
+<%--            </form>--%>
         </div>
     </c:forEach>
 </div>
