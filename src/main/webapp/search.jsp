@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: jamesolson
@@ -12,13 +13,19 @@
 </head>
 <body>
 <div class="input-group mb-3">
-    <form action="/SearchServlet" method="GET" id="search" name="inputvalue">
+    <form action="/Search" method="post" id="search">
         <input type="text" class="form-control" aria-label="Default"
-               aria-describedby="inputGroup-sizing-default">
+               aria-describedby="inputGroup-sizing-default"  name="inputvalue">
         <div class="input-group-prepend">
             <button>search</button>
         </div>
     </form>
+    <c:forEach var="ad" items="${ads}">
+        <div>
+            <h2>${ad.title}</h2>
+            <p>${ad.description}</p>
+        </div>
+    </c:forEach>
 </div>
 </body>
 </html>
