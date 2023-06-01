@@ -28,7 +28,9 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
-    public List<Ad> search(String inputvalue) {}
+    public List<Ad> search(String inputvalue) {
+        return null;
+    }
     
       public void delete(Long id) {
     }
