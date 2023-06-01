@@ -43,6 +43,16 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    public void deleteById(Long id) {
+        String query = "DELETE FROM users WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+        } catch (SQLException e) {
+            throw new RuntimeException("error deleting user", e);
+        }
+    }
+
     @Override
     public User findByEmail(String email) {
         String query = "SELECT * FROM users WHERE email = ? LIMIT 1";
