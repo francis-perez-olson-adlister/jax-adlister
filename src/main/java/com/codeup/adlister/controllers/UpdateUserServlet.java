@@ -37,9 +37,11 @@ public class UpdateUserServlet extends HttpServlet {
         User user = DaoFactory.getUsersDao().findById(userId);
         String hash = Password.hash(password);
 
-        boolean inputHasErrors = username.isEmpty() || email.isEmpty() || password.isEmpty() || (!password.equals(passwordConfirmation));
+        boolean inputHasErrors = username.isEmpty() || email.isEmpty() || (!password.equals(passwordConfirmation)) || password.length() < 10;
 
-        if (inputHasErrors) {
+        boolean noSpecialChar = (!(password.contains("!") || password.contains("@") || password.contains("#") || password.contains("$") || password.contains("%") || password.contains("^") || password.contains("&")|| password.contains("*")));
+
+        if (inputHasErrors || noSpecialChar) {
             resp.sendRedirect("/profile/update");
         } else {
             user.setUsername(username);

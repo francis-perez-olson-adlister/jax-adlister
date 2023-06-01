@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -32,9 +34,15 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
-        boolean inputHasErrors = username.isEmpty() || email.isEmpty() || password.isEmpty() || (!password.equals(passwordConfirmation));
+        boolean inputHasErrors = username.isEmpty() || email.isEmpty() || (!password.equals(passwordConfirmation)) || password.length() < 10;
 
-        if (inputHasErrors) {
+        boolean noSpecialChar = (!(password.contains("!") || password.contains("@") || password.contains("#") || password.contains("$") || password.contains("%") || password.contains("^") || password.contains("&")|| password.contains("*")));
+
+
+
+
+
+        if (inputHasErrors || noSpecialChar) {
             // Set the input values as request attributes for the next rendering of the form
             request.setAttribute("username", username);
             request.setAttribute("email", email);
