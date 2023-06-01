@@ -46,6 +46,7 @@ public class UpdateUserServlet extends HttpServlet {
             user.setEmail(email);
             user.setPassword(hash);
             DaoFactory.getUsersDao().update(user);
+            req.getSession().invalidate();
             resp.sendRedirect("/profile");
         }
 
