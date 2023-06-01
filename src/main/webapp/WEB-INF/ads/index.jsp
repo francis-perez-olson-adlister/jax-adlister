@@ -17,12 +17,10 @@
         <div class="adCard col-md-4">
             <div>
                 <h2>${ad.title}</h2>
-                <p>${ad.description}</p>
+                <form action="/details" method="get">
+                    <button class="details" id="detailsBtn" name="detailsBtn" value="${ad.id}">Details</button>
+                </form>
             </div>
-<%--            <form action="/edit" method="get">--%>
-<%--                <button class="edit" id="editButton" name="editButton" value=${ad.id}>Edit</button>--%>
-<%--                <button class="delete" id="deleteButton" name="deleteButton" value=${ad.id}>Delete</button>--%>
-<%--            </form>--%>
         </div>
     </c:forEach>
 </div>
