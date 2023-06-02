@@ -52,8 +52,9 @@
     }
 
     #email {
-      margin-left: 180px;
-      margin-top: 320px;
+    margin-left: 10px;
+    /*  margin-left: 180px;*/
+    /*  margin-top: 320px;*/
     }
   </style>
 </head>

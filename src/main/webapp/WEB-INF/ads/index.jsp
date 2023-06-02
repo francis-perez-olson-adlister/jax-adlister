@@ -18,7 +18,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             grid-gap: 20px;
-            margin-top: 10px; /* Add margin to adjust for the fixed navbar */
+            margin-top: 10px;
         }
 
         .container::before,
@@ -27,7 +27,9 @@
         }
 
         .adCard {
-            height: 420px;
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
             color: black;
             border-radius: 1rem;
             border: 1px solid transparent;
@@ -62,6 +64,7 @@
             border-radius: 1rem 1rem 0 0;
         }
     </style>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
