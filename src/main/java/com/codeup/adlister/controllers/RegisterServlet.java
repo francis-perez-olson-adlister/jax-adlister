@@ -36,18 +36,20 @@ public class RegisterServlet extends HttpServlet {
 
         boolean inputHasErrors = username.isEmpty() || email.isEmpty() || (!password.equals(passwordConfirmation)) || password.length() < 10;
 
-        boolean noSpecialChar = (!(password.contains("!") || password.contains("@") || password.contains("#") || password.contains("$") || password.contains("%") || password.contains("^") || password.contains("&")|| password.contains("*")));
-
-
-
-
+        boolean noSpecialChar = (!(password.contains("!") || password.contains("@") || password.contains("#") || password.contains("$") || password.contains("%") || password.contains("^") || password.contains("&") || password.contains("*")));
 
         if (inputHasErrors || noSpecialChar) {
             // Set the input values as request attributes for the next rendering of the form
             request.setAttribute("username", username);
             request.setAttribute("email", email);
 
-            response.sendRedirect("/register");
+            if (inputHasErrors) {
+                request.setAttribute("passwordError", "Password must be at least 10 characters long with at least one special character.");
+            } else if (noSpecialChar) {
+                request.setAttribute("passwordError", "PPassword must be at least 10 characters long with at least one special character.");
+            }
+
+            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             return;
         }
 
@@ -73,6 +75,4 @@ public class RegisterServlet extends HttpServlet {
         DaoFactory.getUsersDao().insert(user);
         response.sendRedirect("/login");
     }
-
 }
-

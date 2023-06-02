@@ -20,7 +20,6 @@ public class UpdateUserServlet extends HttpServlet {
         User user = DaoFactory.getUsersDao().findByUsername(username);
         req.setAttribute("user", user);
         System.out.println(user.getEmail());
-
     }
 
     @Override
@@ -30,19 +29,17 @@ public class UpdateUserServlet extends HttpServlet {
         String password = req.getParameter("password");
         Long userId = Long.valueOf(req.getParameter("userId"));
         String passwordConfirmation = req.getParameter("confirm_password");
-        System.out.println(username);
-        System.out.println(email);
-        System.out.println(password);
-        System.out.println(passwordConfirmation);
+
         User user = DaoFactory.getUsersDao().findById(userId);
         String hash = Password.hash(password);
 
         boolean inputHasErrors = username.isEmpty() || email.isEmpty() || (!password.equals(passwordConfirmation)) || password.length() < 10;
-
-        boolean noSpecialChar = (!(password.contains("!") || password.contains("@") || password.contains("#") || password.contains("$") || password.contains("%") || password.contains("^") || password.contains("&")|| password.contains("*")));
+        boolean noSpecialChar = (!(password.contains("!") || password.contains("@") || password.contains("#") || password.contains("$") || password.contains("%") || password.contains("^") || password.contains("&") || password.contains("*")));
 
         if (inputHasErrors || noSpecialChar) {
-            resp.sendRedirect("/profile/update");
+            String errorMessage = "Password must be at least 10 characters long with at least one special character.";
+            req.setAttribute("error", errorMessage);
+            req.getRequestDispatcher("/WEB-INF/updateProfile.jsp").forward(req, resp);
         } else {
             user.setUsername(username);
             user.setEmail(email);
@@ -51,6 +48,5 @@ public class UpdateUserServlet extends HttpServlet {
             req.getSession().invalidate();
             resp.sendRedirect("/profile");
         }
-
     }
 }

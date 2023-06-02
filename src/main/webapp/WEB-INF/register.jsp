@@ -4,6 +4,16 @@
     <jsp:include page="partials/head.jsp">
         <jsp:param name="title" value="Register For Our Site!" />
     </jsp:include>
+
+    <style>
+        body {
+            background-image: url("/img/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(15px); /* Adjust the blur value as needed */
+            -webkit-backdrop-filter: blur(15px); /* For Safari support */
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="partials/navbar.jsp" />
@@ -19,6 +29,11 @@
     <% if (request.getAttribute("emailError") != null) { %>
     <div class="alert alert-danger" role="alert">
         <%= request.getAttribute("emailError") %>
+    </div>
+    <% } %>
+    <% if (request.getAttribute("passwordError") != null) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= request.getAttribute("passwordError") %>
     </div>
     <% } %>
 

@@ -19,7 +19,7 @@ public class EditAdServlet extends HttpServlet {
 
         if (delete != null) {
             DaoFactory.getAdsDao().delete(Long.valueOf(delete));
-            resp.sendRedirect("/profile.jsp");
+            resp.sendRedirect("/profile");
         } else {
             String edit = req.getParameter("editButton");
             Ad ad = DaoFactory.getAdsDao().selectAdById(Long.valueOf(edit));

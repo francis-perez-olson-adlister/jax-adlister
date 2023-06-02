@@ -4,6 +4,18 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Please Log In" />
     </jsp:include>
+
+    <style>
+        body {
+            background-image: url("/img/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(15px); /* Adjust the blur value as needed */
+            -webkit-backdrop-filter: blur(15px); /* For Safari support */
+        }
+
+    </style>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />

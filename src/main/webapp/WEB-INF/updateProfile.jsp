@@ -4,11 +4,24 @@
   <jsp:include page="partials/head.jsp">
     <jsp:param name="title" value="Register For Our Site!" />
   </jsp:include>
+  <style>
+    body {
+      background-image: url("/img/background.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      backdrop-filter: blur(15px); /* Adjust the blur value as needed */
+      -webkit-backdrop-filter: blur(15px); /* For Safari support */
+    }  </style>
 </head>
 <body>
 <jsp:include page="partials/navbar.jsp" />
 <div class="container">
   <h1>Please fill in your information.</h1>
+  <% if (request.getAttribute("error") != null) { %>
+  <div class="alert alert-danger" role="alert">
+    <%= request.getAttribute("error") %>
+  </div>
+  <% } %>
   <form action="/profile/update" method="post">
     <div class="form-group">
       <label for="username">Username</label>
@@ -29,9 +42,9 @@
     <input type="hidden" name="userId" value="${user.id}">
     <input type="submit" class="btn btn-primary btn-block">
   </form>
-  <p>Tired of us? Delete yo self.</p>
+  <p id="delete">Tired of us? Delete yo self.</p>
   <form action="/profile/delete" method="get">
-    <button type="submit" name="deleteUser" value="${user.id}">Delete Account</button>
+    <button class="btn btn-primary" type="submit" name="deleteUser" value="${user.id}">Delete Account</button>
   </form>
 </div>
 </body>
