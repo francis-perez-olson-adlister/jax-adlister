@@ -25,8 +25,8 @@
         #pImage {
             border: black 2px solid;
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
             background-color: white;
             margin-top: 100px;
             margin-left: 500px;
@@ -57,7 +57,7 @@
         }
 
         .adCard {
-            height: 170px;
+            height: fit-content;
             width: 700px;
             color: black;
             border-radius: 1rem;
