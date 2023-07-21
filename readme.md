@@ -3,15 +3,26 @@
 
 ## Summary
 
-The Adcentral project is imitating sites like craigslist, ebay and etsy but ours is just the cat's pajamas. Designed by Jim, Alex, and Xavier
-we added user-friendly features and additional security measures. Some features include a search function, the ability to delete
-user profiles, and password verification, amongst a plethora of additional unlisted features you will find in our Adlister.
+The ADcentral project is imitating sites like craigslist, ebay and etsy but ours is just the cat's pajamas. Designed by Jim, Alex, and Xavier.
+Some features include a search function, the ability to delete user profiles, and password verification. Additional unlisted features can also be found on
+ADcentral
 
-## Instructional
-To use ADcentral the migration file must be ran to populate the required database. Prior to posting a listing on ADcentral the user has
-to register and login. once an ad has been created user and visitors can view the posting.
+## How To Run
+Clone the project
+```bash 
+git clone git@github.com:francis-perez-olson-adlister/jax-adlister.git
+```
+Migration
+```bash
+Run AdLister migration file
+```
+Make sure to have a mySQL server running with terminal command
+```bash
+mySQL.server start
+```
 
 
+Ensure latest TomCat 9.0.74 server is ready to deploy on local host. Install all Maven dependencies.
 
 
 ## Functionality
@@ -31,12 +42,13 @@ to register and login. once an ad has been created user and visitors can view th
 
 ## Technology
 
-* Java jsp, servlets, and interfaces
-* Html
-* Apache tomcat
+* Java
+* Html 5
+* CSS
+* Apache Tomcat
 * Maven
 * Bootstrap
-* SQL
+* MySQL
 * MVC
 * CRUD
 
